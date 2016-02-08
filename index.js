@@ -9,7 +9,7 @@ module.exports = function(extensions) {
     }
   })
 
-  var regexes = extensions.map(function(ext){ return new RegExp(ext, 'i') })
+  var regexes = extensions.map(function(ext){ return new RegExp(ext, '') })
 
   Module._resolveFilename = function(request, parent) {
     if (regexes.some(function(regex){ return request.match(regex) })) {
