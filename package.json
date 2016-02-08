@@ -1,0 +1,19 @@
+{
+  "name": "node-hook-filename",
+  "version": "0.1.0",
+  "description": "\"Hooking node require calls for specific extensions to only return the filename\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NowTV-Assurance/node-hook-filename.git"
+  },
+  "author": "NowTV Assurance",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NowTV-Assurance/node-hook-filename/issues"
+  },
+  "homepage": "https://github.com/NowTV-Assurance/node-hook-filename#readme"
+}
