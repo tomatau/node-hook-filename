@@ -1,6 +1,6 @@
 {
   "name": "node-hook-filename",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "\"Hooking node require calls for specific extensions to only return the filename\"",
   "main": "index.js",
   "scripts": {
