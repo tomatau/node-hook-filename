@@ -1,8 +1,10 @@
 # node-hook-filename
-Hooking node require calls for specific extensions to only return the filename
+Hooking node require calls for specific extensions to only return the filename or a specified module
 
 
 ## Usage
+
+### Returning filename
 
 ```js
 var nhf = require('node-hook-filename');
@@ -21,10 +23,19 @@ var normalRequire = require('../path/too/js/file');
 // normalRequire is unaffected
 ```
 
+### Returning a specified module
+
+```js
+var nhf = require('node-hook-filename');
+nhf(['config'], './config/dev');
+
+var configRequire = require('config');
+// configRequire will be the export of ./config/dev.js
+```
+
 
 Useful if you are running a universal/isomorphic app that requires asset files.
 
 This is mostly useful for **testing** and not production ready!
 
 Greatly influenced by https://github.com/bahmutov/node-hook
-

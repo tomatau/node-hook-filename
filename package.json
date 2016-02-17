@@ -4,7 +4,8 @@
   "description": "\"Hooking node require calls for specific extensions to only return the filename\"",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/mocha test/**/*",
+    "test:watch": "node_modules/.bin/mocha --watch test/**/*"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/NowTV-Assurance/node-hook-filename/issues"
   },
-  "homepage": "https://github.com/NowTV-Assurance/node-hook-filename#readme"
+  "homepage": "https://github.com/NowTV-Assurance/node-hook-filename#readme",
+  "devDependencies": {
+    "mocha": "2.4.5"
+  }
 }
