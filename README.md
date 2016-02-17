@@ -23,14 +23,14 @@ var normalRequire = require('../path/too/js/file');
 // normalRequire is unaffected
 ```
 
-### Returning a specified module
+### Passing a callback function
 
 ```js
 var nhf = require('node-hook-filename');
-nhf(['config'], './config/dev');
+nhf(['config'], () => 'foo');
 
 var configRequire = require('config');
-// configRequire will be the export of ./config/dev.js
+// configRequire will return 'foo'
 ```
 
 
