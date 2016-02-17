@@ -26,7 +26,7 @@ describe('node-hook-filename module overrides', () => {
 
     it('require should return an original file if no override is specified', () => {
 
-        const original = require('./original.json');
+        const original = require('./test');
         assert.deepEqual(original,{foo:"bar"});
     });
 
