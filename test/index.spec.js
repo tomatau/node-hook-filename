@@ -1,33 +1,55 @@
-'use strict';
-const assert = require('assert'),
-    nhf = require('../index');
+const assert = require('assert')
+const sinon = require('sinon')
+const nhf = require('../index')
 
 describe('node-hook-filename module overrides', () => {
+  context('Given Override Extensions', ()=> {
+    before(()=> {
+      nhf([ '.json', 'dummy' ])
+    })
 
-    it('require should return filename instead of module', () => {
+    it('should modify require to return the filenames', ()=> {
+      const filename = './fixtures/config.json'
+      const actual = require(filename)
+      assert.equal(actual, filename)
+    })
 
-        nhf(['.json']);
+    it('should not modify require for non matched files', ()=> {
+      const actual = require('./fixtures/test')
+      assert.deepEqual(actual, { not: 'affected' })
+    })
 
-        const filename = './config.json';
-        const config = require(filename);
+    it('should only modify require for a complete string match', ()=> {
+      const actual = require('./fixtures/configjson.js')
+      assert.deepEqual(actual, { also: 'not affected' })
+    })
+  })
 
-        assert.equal(config, filename);
-    });
+  context('Given Override Extension With Callback', ()=> {
+    const callback = sinon.spy(() => ({ y: 'z' }))
 
-    it('require should call function and return specified string', () => {
+    before(()=> {
+      nhf([ '.ext', '.ext2' ], callback)
+    })
 
-        const obj = { 'y' : 'z'};
-        nhf(['config'], () => obj);
+    afterEach(()=> {
+      callback.reset()
+    })
 
-        const configFile = require('./config');
+    it('should invoke the callback with the matching filename', ()=> {
+      const filename = './fixtures/matching.ext'
+      require(filename)
+      assert.ok(callback.calledWith(filename))
+      callback.reset()
+      const filename2 = './fixtures/matching.ext2'
+      require(filename2)
+      assert.ok(callback.calledWith(filename2))
+    })
 
-        assert.equal(configFile, obj);
-    });
-
-    it('require should return an original file if no override is specified', () => {
-
-        const original = require('./test');
-        assert.deepEqual(original,{foo:"bar"});
-    });
-
-});
+    it('should modify the return value to eql the return from callback', ()=> {
+      const filename = './fixtures/matching.ext'
+      const actual = require(filename)
+      assert.deepEqual(actual, callback())
+    })
+  })
+})

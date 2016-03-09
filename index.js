@@ -1,25 +1,20 @@
-var Module = require('module');
-
-var originalLoad = Module._load;
+const Module = require('module');
+const originalLoad = Module._load;
 
 module.exports = function(extensions, override) {
+  override = override ? override : (r) => r;
 
-  override = override ? override : function(r) { return r };
-
-  extensions.forEach(function(ext) {
-    Module._extensions[ext] = function(module, filename) {
+  extensions.forEach((ext) => {
+    Module._extensions[ext] = (module, filename) => {
       module.exports = filename;
     }
   });
 
-  var regexes = extensions.map(function(ext){ return new RegExp(ext, '') });
-
   Module._load = function(request, parent, isMain) {
-
-    if (regexes.some(function(regex){ return request.match(regex) })) {
+    const requestMatchesExt = (ext) => request.includes(ext)
+    if (extensions.some(requestMatchesExt)) {
       return override(request);
     }
-
     return originalLoad.call(this, request, parent, isMain);
   }
 };
