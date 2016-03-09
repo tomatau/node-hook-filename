@@ -4,6 +4,7 @@
   "description": "\"Hooking node require calls for specific extensions to only return the filename\"",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint . --ext .js",
     "test": "node_modules/.bin/mocha test/**/*.spec.js",
     "test:watch": "node_modules/.bin/mocha --watch test/**/*"
   },
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/NowTV-Assurance/node-hook-filename#readme",
   "devDependencies": {
+    "eslint": "^2.2.0",
     "mocha": "2.4.5",
     "sinon": "^1.17.3"
   }
