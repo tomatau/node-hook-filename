@@ -1,0 +1,14 @@
+machine:
+  timezone:
+    Europe/London
+  node:
+    version: v4
+
+dependencies:
+  cache_directories:
+    - node_modules
+
+test:
+  override:
+    - npm run lint
+    - npm run test -- --reporter spec
