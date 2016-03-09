@@ -1,21 +1,21 @@
-# node-hook-filename
-Hooking node require calls for specific extensions to only return the filename or a specified module
+[![Circle CI](https://circleci.com/gh/tomatau/node-hook-filename.svg?style=svg)](https://circleci.com/gh/tomatau/node-hook-filename)
 
+# node-hook-filename
+
+Hooking node require calls for specific extensions to only return the filename or the return value of a callback.
 
 ## Usage
 
 ### Returning filename
 
 ```js
-var nhf = require('node-hook-filename');
+const nhf = require('node-hook-filename')
 
+nhf(['.scss', '.svg'])
 
-nhf(['.scss', '.svg']);
-
-
-var scssAsset = require('../path/too/filename.scss');
-var svgAsset = require('../path/too/filename.svg');
-var normalRequire = require('../path/too/js/file');
+const scssAsset = require('../path/too/filename.scss')
+const svgAsset = require('../path/too/filename.svg')
+const normalRequire = require('../path/too/js/file')
 
 // scssAsset === '../path/too/filename.scss'
 // svgAsset === '../path/too/filename.svg'
@@ -26,15 +26,15 @@ var normalRequire = require('../path/too/js/file');
 ### Passing a callback function
 
 ```js
-var nhf = require('node-hook-filename');
-nhf(['config'], () => 'foo');
+const nhf = require('node-hook-filename')
+nhf(['config'], (filename) => 'foo ' + filename)
 
-var configRequire = require('config');
-// configRequire will return 'foo'
+const configRequire = require('config')
+// configRequire will return 'foo config'
 ```
 
 
-Useful if you are running a universal/isomorphic app that requires asset files.
+Handy if you are running a universal/isomorphic app that requires asset files.
 
 This is mostly useful for **testing** and not production ready!
 
