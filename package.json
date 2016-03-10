@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NowTV-Assurance/node-hook-filename.git"
+    "url": "git+https://github.com/tomatau/node-hook-filename.git"
   },
   "author": "NowTV Assurance",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/NowTV-Assurance/node-hook-filename/issues"
+    "url": "https://github.com/tomatau/node-hook-filename/issues"
   },
-  "homepage": "https://github.com/NowTV-Assurance/node-hook-filename#readme",
+  "homepage": "https://github.com/tomatau/node-hook-filename#readme",
   "devDependencies": {
     "eslint": "^2.2.0",
     "mocha": "2.4.5",
