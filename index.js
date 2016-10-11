@@ -13,7 +13,7 @@ module.exports = function(extensions, override) {
   Module._load = function(request, parent, isMain) {
     const requestMatchesExt = (ext) => request.includes(ext)
     if (extensions.some(requestMatchesExt)) {
-      return override(request)
+      return override(request, parent)
     }
     return originalLoad.call(this, request, parent, isMain)
   }
