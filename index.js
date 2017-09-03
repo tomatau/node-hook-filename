@@ -1,20 +1,19 @@
 const Module = require('module')
+const path = require('path')
+
 const originalLoad = Module._load
 
-module.exports = function(extensions, override) {
-  override = override ? override : (r) => r
-
-  extensions.forEach((ext) => {
-    Module._extensions[ext] = (module, filename) => {
-      module.exports = filename
-    }
-  })
+module.exports = function(regexs, override) {
+  override = override ? override : request => request
 
   Module._load = function(request, parent, isMain) {
-    const requestMatchesExt = (ext) => request.includes(ext)
-    if (extensions.some(requestMatchesExt)) {
-      return override(request, parent)
-    }
-    return originalLoad.call(this, request, parent, isMain)
+    return regexs.some(regex => regex.test(request))
+      ? override(request, parent)
+      : originalLoad.call(this, request, parent, isMain)
   }
 }
+
+module.exports.normalize = (request, parent) =>
+  path
+    .resolve(parent.id, '..', request)
+    .replace(path.parse(process.cwd()).dir, '')

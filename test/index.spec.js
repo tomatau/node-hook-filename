@@ -5,7 +5,7 @@ const nhf = require('../index')
 describe('node-hook-filename module overrides', () => {
   context('Given Override Extensions', ()=> {
     before(()=> {
-      nhf([ '.json', 'dummy' ])
+      nhf([ /\.json/, /dummy/ ])
     })
 
     it('should modify require to return the filenames', ()=> {
@@ -29,7 +29,7 @@ describe('node-hook-filename module overrides', () => {
     const callback = sinon.spy(() => ({ y: 'z' }))
 
     before(()=> {
-      nhf([ '.ext', '.ext2' ], callback)
+      nhf([ /\.ext/, /\.ext2/ ], callback)
     })
 
     afterEach(()=> {
